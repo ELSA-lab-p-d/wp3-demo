@@ -29,7 +29,11 @@ cd ../../
 # InfoRing node setup
 ########################
 
-# InfoRing node start
 cd infrastructure/inforing
+
+# Generate random dataset
+python generate_random_data.py
+
+# InfoRing node start
 inforing_config=$(pwd)/inforing.yaml
 vnode start --user -c $inforing_config --image harbor2.vantage6.ai/infrastructure/node:$VERSION_NODE
