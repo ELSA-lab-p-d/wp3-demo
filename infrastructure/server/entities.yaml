@@ -1,0 +1,21 @@
+collaborations:
+- encrypted: false
+  name: inforing-demo
+  participants:
+  - api_key: 844a7d92-1cc9-4856-bf33-0613252d5b3c
+    name: inforing
+nodes: []
+organizations:
+- name: Inforing B.V.
+  address1: Verlengde Poolseweg 24
+  address2: Breda
+  country: Netherlands
+  domain: inforing.nl
+  public_key: ''
+  users:
+  - email: inforing@no-reply.tld
+    username: inforing-user
+    firstname: Info
+    lastname: Ring
+    password: inforing-password 
+  zipcode: 4818 CL
