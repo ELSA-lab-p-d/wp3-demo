@@ -1,14 +1,23 @@
-import pandas as pd
-import numpy as np
 import os
 import sys
-from datetime import datetime, timedelta
+import yaml
 
-filename="data.csv"
+with open('inforing.yaml', 'r') as f:
+    config_node = yaml.safe_load(f)
+filename=config_node["application"]["databases"][0]["uri"]
+
+filename = os.path.abspath(filename)
+config_node["application"]["databases"][0]["uri"] = filename
+with open('inforing.yaml', 'w') as f:
+    yaml.safe_dump(config_node, f)
 
 if os.path.exists(filename):
     print(f"File {filename} exists and does not need to be created")
     sys.exit(0)
+
+import pandas as pd
+import numpy as np
+from datetime import datetime, timedelta
 
 def generate_person(number_of_records:int):
     subtractionDays = np.random.randint(1,365)
