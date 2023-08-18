@@ -1,6 +1,14 @@
 import pandas as pd
 import numpy as np
+import os
+import sys
 from datetime import datetime, timedelta
+
+filename="data.csv"
+
+if os.path.exists(filename):
+    print(f"File {filename} exists and does not need to be created")
+    sys.exit(0)
 
 def generate_person(number_of_records:int):
     subtractionDays = np.random.randint(1,365)
