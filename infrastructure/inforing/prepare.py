@@ -1,3 +1,20 @@
+import os
+import sys
+import yaml
+
+with open('template.yaml', 'r') as f:
+    config_node = yaml.safe_load(f)
+filename=config_node["application"]["databases"][0]["uri"]
+
+filename = os.path.abspath(filename)
+config_node["application"]["databases"][0]["uri"] = filename
+with open('inforing.yaml', 'w') as f:
+    yaml.safe_dump(config_node, f)
+
+if os.path.exists(filename):
+    print(f"File {filename} exists and does not need to be created")
+    sys.exit(0)
+
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta

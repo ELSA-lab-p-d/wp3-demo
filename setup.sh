@@ -32,7 +32,7 @@ cd ../../
 cd infrastructure/inforing
 
 # Generate random dataset
-python generate_random_data.py
+python prepare.py
 
 # InfoRing node start
 inforing_config=$(pwd)/inforing.yaml

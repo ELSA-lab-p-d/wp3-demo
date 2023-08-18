@@ -7,6 +7,8 @@ docker volume rm $(docker volume ls -f name=vantage6 -q)
 docker volume rm data.csv
 # docker volume rm $(docker volume ls -f name=inforing -q)
 
+docker network rm $(docker network ls -f name=vantage6 -q)
+
 # Optional: delete images
 # docker rmi -f $(docker image ls --filter=reference='harbor*/*/*' -q)
 
