@@ -4,7 +4,6 @@ vserver stop --user -n wp3server
 deactivate
 
 docker volume rm $(docker volume ls -f name=vantage6 -q)
-docker volume rm data.csv
 # docker volume rm $(docker volume ls -f name=inforing -q)
 
 docker network rm $(docker network ls -f name=vantage6 -q)
