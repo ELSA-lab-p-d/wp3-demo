@@ -37,6 +37,3 @@ python generate_random_data.py
 # InfoRing node start
 inforing_config=$(pwd)/inforing.yaml
 vnode start --user -c $inforing_config --image harbor2.vantage6.ai/infrastructure/node:$VERSION_NODE
-
-# Connect the inforing node to the network of the server
-docker network connect vantage6-wp3server-user-network vantage6-inforing-user

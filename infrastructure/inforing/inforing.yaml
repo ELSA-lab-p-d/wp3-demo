@@ -27,7 +27,7 @@ application:
     max_size: 1024
     use_console: true
   port: '5000'
-  server_url: http://vantage6-wp3server-user-server
+  server_url: http://host.docker.internal
   task_dir: ./inforing/tasks
 environments:
   acc: {}
