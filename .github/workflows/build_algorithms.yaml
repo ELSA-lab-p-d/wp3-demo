@@ -31,4 +31,4 @@ jobs:
         with:
           context: researcher/algorithms/count
           push: true
-          tags: ghcr.io/${{ env.REPO }}:count
+          tags: ghcr.io/${{ env.REPO }}/count
