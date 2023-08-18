@@ -2,7 +2,7 @@ import os
 import sys
 import yaml
 
-with open('inforing.yaml', 'r') as f:
+with open('template.yaml', 'r') as f:
     config_node = yaml.safe_load(f)
 filename=config_node["application"]["databases"][0]["uri"]
 
