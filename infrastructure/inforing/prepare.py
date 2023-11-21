@@ -4,10 +4,10 @@ import yaml
 
 with open('template.yaml', 'r') as f:
     config_node = yaml.safe_load(f)
-filename=config_node["application"]["databases"][0]["uri"]
+filename=config_node["application"]["databases"]["default"]
 
 filename = os.path.abspath(filename)
-config_node["application"]["databases"][0]["uri"] = filename
+config_node["application"]["databases"]["default"] = filename
 with open('inforing.yaml', 'w') as f:
     yaml.safe_dump(config_node, f)
 
@@ -22,7 +22,7 @@ from datetime import datetime, timedelta
 def generate_person(number_of_records:int):
     subtractionDays = np.random.randint(1,365)
     startDate = (datetime.today() - timedelta(days=subtractionDays)).date()
-    addition_days_since_start = np.random.randint(1,subtractionDays, size=number_of_records)
+    addition_days_since_start = np.random.randint(0,subtractionDays, size=number_of_records)
     
     dates = []
     for x in addition_days_since_start:

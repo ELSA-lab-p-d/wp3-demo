@@ -1,8 +1,6 @@
-VERSION_NODE=3.10.4
+VERSION_NODE=3.7.3
 VERSION_SERVER=$VERSION_NODE
 
-python -m venv ./venv
-source ./venv/bin/activate
 
 pip install vantage6==$VERSION_NODE
 
@@ -32,7 +30,7 @@ cd ../../
 cd infrastructure/inforing
 
 # Generate random dataset
-../../venv/bin/python prepare.py
+python prepare.py
 
 # InfoRing node start
 inforing_config=$(pwd)/inforing.yaml
