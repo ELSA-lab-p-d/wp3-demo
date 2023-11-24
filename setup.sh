@@ -35,3 +35,13 @@ python prepare.py
 # InfoRing node start
 inforing_config=$(pwd)/inforing.yaml
 vnode start --user -c $inforing_config --image harbor2.vantage6.ai/infrastructure/node:$VERSION_NODE
+
+########################
+# Launch user interface
+########################
+docker run --rm -d \
+    --name vantage6-ui \
+    -p 80:80 \
+    -e "SERVER_URL=http://localhost:5000" \
+    -e "API_PATH=/api" \
+    harbor2.vantage6.ai/infrastructure/ui:3.7.1

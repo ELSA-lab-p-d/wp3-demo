@@ -1,6 +1,8 @@
 vnode stop --user -n inforing
 vserver stop --user -n wp3server
 
+docker stop vantage6-ui
+
 docker volume rm $(docker volume ls -f name=vantage6 -q)
 # docker volume rm $(docker volume ls -f name=inforing -q)
 
