@@ -1,12 +1,12 @@
 # python vantage6 algorithm base image
-FROM harbor2.vantage6.ai/infrastructure/algorithm-base
+FROM harbor2.vantage6.ai/infrastructure/algorithm-base:3.7.3
 
 # this should reflect the python package name
 ARG PKG_NAME="count_citizens"
 
 # install federated algorithm
-COPY . /app
-RUN pip install /app
+COPY . /count_citizens
+RUN pip install /count_citizens
 
 ENV PKG_NAME=${PKG_NAME}
 

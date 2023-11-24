@@ -8,6 +8,6 @@ setup(
     packages=find_packages(),
     python_requires='>=3.6',
     install_requires=[
-        'vantage6-client>=3.10.4'
+        'vantage6-client==3.7.3'
     ]
 )
