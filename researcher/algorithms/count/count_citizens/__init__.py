@@ -31,7 +31,7 @@ def count_citizens(client, data):
 
     count = 0
     for result in results:
-        count += result['citizen_count']
+        count += result['results']['citizen_count']
     
     return {"total_citizen_count": count}
 
