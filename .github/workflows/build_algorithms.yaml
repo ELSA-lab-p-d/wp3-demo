@@ -29,7 +29,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build count algorithm
         id: docker_build_count
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v5
         with:
           context: researcher/algorithms/count
           push: true
