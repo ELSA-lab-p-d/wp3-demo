@@ -39,14 +39,7 @@ def RPC_count_citizens(data):
     info("In the requested method")
     info(f"the dataset contains {len(data.index)} rows")
     info(f"count: {data['person_id'].nunique()}")
-    result_dict = get_template_json()
-    result_dict["results"] = {
-        "citizen_count": data['person_id'].nunique()
-    }
-    return json.dumps(result_dict, indent=2)
-
-def get_template_json():
-    {
+    result_dict = {
         "dashboard":
             [
             {
@@ -145,3 +138,7 @@ def get_template_json():
             }
         ]
     }
+    result_dict["results"] = {
+        "citizen_count": data['person_id'].nunique()
+    }
+    return result_dict
