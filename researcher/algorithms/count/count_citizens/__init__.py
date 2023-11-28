@@ -31,14 +31,8 @@ def count_citizens(client, data):
 
     count = 0
     for result in results:
-        count += result['results']['citizen_count']
+        count += result['citizen_count']
     
-    return {"total_citizen_count": count}
-
-def RPC_count_citizens(data):
-    info("In the requested method")
-    info(f"the dataset contains {len(data.index)} rows")
-    info(f"count: {data['person_id'].nunique()}")
     result_dict = {
         "dashboard":
             [
@@ -138,7 +132,16 @@ def RPC_count_citizens(data):
             }
         ]
     }
-    result_dict["results"] = {
+
+    result_dict["results"] = {"total_citizen_count": count}
+    
+    return result_dict
+
+def RPC_count_citizens(data):
+    info("In the requested method")
+    info(f"the dataset contains {len(data.index)} rows")
+    info(f"count: {data['person_id'].nunique()}")
+    result_dict = {
         "citizen_count": data['person_id'].nunique()
     }
     return result_dict
