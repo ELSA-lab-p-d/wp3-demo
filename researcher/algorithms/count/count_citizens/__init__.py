@@ -135,7 +135,7 @@ def count_citizens(client, data):
 
     result_dict["results"] = {"total_citizen_count": count}
     
-    return result_dict
+    return json.dumps(result_dict, indent=2)
 
 def RPC_count_citizens(data):
     info("In the requested method")
