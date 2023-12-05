@@ -62,11 +62,11 @@ def count_citizens(client, data):
                 "type": "bar",
                 "title": "Signals per Month",
                 "data": {
-                "x": list(map(int, list(month_sum_signals.keys()))),
+                "x": list(month_sum_signals.keys()),
                 "datasets": [
                     {
                     "label": "Dataset 1",
-                    "y": list(max_signals.values())
+                    "y": list(month_sum_signals.values())
                     }
                 ]
                 }
