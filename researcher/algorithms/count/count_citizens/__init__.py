@@ -50,11 +50,10 @@ def count_citizens(client, data):
         month_sum = result["signals_per_month"]["sum"]
         for i in list(range(0,len(signal_count))):
             i_str = month_id[i].strftime("%Y-%m")
-            
-            if i_str in month_sum_signals:
-                month_sum_signals[i_str] = month_sum_signals[i_str] + month_sum[i]
-            else:
-                month_sum_signals[i_str] = month_sum[i]
+            print(f"sum for month {i_str} with value {month_sum[i]}")
+            if i_str not in month_sum_signals:
+                month_sum_signals[i_str] = 0
+            month_sum_signals[i_str] = month_sum_signals[i_str] + month_sum[i]
 
     result_dict = {
         "dashboard":
