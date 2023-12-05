@@ -38,7 +38,7 @@ def count_citizens(client, data):
         
         signal_count =  result["signals_per_citizen"]["signal_count"]
         signal_sum =  result["signals_per_citizen"]["signal_sum"]
-        for i in list(range(0,len(signal_count))):
+        for i in range(0,len(signal_count)):
             i_str = str(signal_count[i])
             
             if i_str in max_signals:
@@ -48,7 +48,7 @@ def count_citizens(client, data):
         
         month_id = result["signals_per_month"]["month"]
         month_sum = result["signals_per_month"]["sum"]
-        for i in list(range(0,len(signal_count))):
+        for i in range(0,len(month_id)):
             i_str = month_id[i]
             print(f"sum for month {i_str} with value {month_sum[i]}")
             if i_str not in month_sum_signals:
