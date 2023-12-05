@@ -97,7 +97,7 @@ def RPC_count_citizens(data):
     counts = np.unique(data.groupby("person_id").size(), return_counts=True)
     data["debt_date"] = pd.to_datetime(data["debt_date"])
     data["debt_date_string"] = data["debt_date"].dt.strftime("%Y-%m")
-    signals_month = data.groupby("debt_date").size()
+    signals_month = data.groupby("debt_date_string").size()
     result_dict = {
         "citizen_count": data['person_id'].nunique(),
         "signals_per_citizen": {
