@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import time
 from vantage6.tools.util import info
 import json
@@ -30,110 +31,63 @@ def count_citizens(client, data):
     results = client.get_results(task_id=task.get("id"))
 
     count = 0
+    max_signals = { }
+    month_sum_signals = { }
     for result in results:
         count += result['citizen_count']
-    
+        
+        signal_count =  result["signals_per_citizen"]["signal_count"]
+        signal_sum =  result["signals_per_citizen"]["signal_sum"]
+        for i in list(range(0,len(signal_count))):
+            i_str = str(signal_count[i])
+            
+            if i_str in max_signals:
+                max_signals[i_str] = max_signals[i_str] + signal_sum[i]
+            else:
+                max_signals[i_str] = signal_sum[i]
+        
+        month_id = result["signals_per_month"]["month"]
+        month_sum = result["signals_per_month"]["sum"]
+        for i in list(range(0,len(signal_count))):
+            i_str = month_id[i]
+            
+            if i_str in month_sum_signals:
+                month_sum_signals[i_str] = month_sum_signals[i_str] + month_sum[i]
+            else:
+                month_sum_signals[i_str] = month_sum[i]
+
     result_dict = {
         "dashboard":
             [
             {
                 "type": "bar",
-                "title": "Acquisitions by year (bar)",
+                "title": "Signals per Month",
                 "data": {
-                "x": [2010, 2011, 2012, 2013, 2014, 2015, 2016],
+                "x": list(map(int, list(month_sum_signals.keys()))),
                 "datasets": [
                     {
                     "label": "Dataset 1",
-                    "y": [10, 20, 15, 25, 22, 30, 28]
-                    },
-                    {
-                    "label": "Dataset 2",
-                    "y": [3, 14, 32, 21, 6, 7, 11]
-                    }
-                ]
-                }
-            },
-            {
-                "type": "line",
-                "title": "Acquisitions by year (line)",
-                "data": {
-                "x": [2010, 2011, 2012, 2013, 2014, 2015, 2016],
-                "datasets": [
-                    {
-                    "label": "Dataset 1",
-                    "y": [10, 20, 15, 25, 22, 30, 28]
-                    },
-                    {
-                    "label": "Dataset 2",
-                    "y": [3, 14, 32, 21, 6, 7, 11]
-                    }
-                ]
-                }
-            },
-            {
-                "type": "bubble",
-                "title": "Acquisitions by year (bubble)",
-                "data": {
-                "x": [2010, 2011, 2012, 2013, 2014, 2015, 2016],
-                "datasets": [
-                    {
-                    "label": "Dataset 1",
-                    "y": [10, 20, 15, 25, 22, 30, 28],
-                    "r": [20, 5, 40, 6, 1, 16, 11]
-                    },
-                    {
-                    "label": "Dataset 2",
-                    "y": [10, 7, 34, 19, 2, 6, 25],
-                    "r": [10, 5, 2, 6, 15, 27, 30]
-                    }
-                ]
-                }
-            },
-            {
-                "type": "radar",
-                "title": "Acquisitions by year (radar)",
-                "data": {
-                "x": [2010, 2011, 2012, 2013, 2014, 2015, 2016],
-                "datasets": [
-                    {
-                    "label": "Dataset 1",
-                    "y": [10, 20, 15, 25, 22, 30, 28]
-                    },
-                    {
-                    "label": "Dataset 2",
-                    "y": [3, 14, 32, 21, 6, 7, 11]
+                    "y": list(max_signals.values())
                     }
                 ]
                 }
             },
             {
                 "type": "pie",
-                "title": "Acquisitions by year (pie)",
+                "title": "Signals per citizen / household",
                 "data": {
-                "x": [2010, 2011, 2012, 2013, 2014, 2015, 2016],
-                "y": [10, 20, 15, 25, 22, 30, 28]
-                }
-            },
-            {
-                "type": "doughnut",
-                "title": "Acquisitions by year (doughnut)",
-                "data": {
-                "x": [2010, 2011, 2012, 2013, 2014, 2015, 2016],
-                "y": [10, 20, 15, 25, 22, 30, 28]
-                }
-            },
-            {
-                "type": "polarArea",
-                "title": "Acquisitions by year (polarArea)",
-                "data": {
-                "x": [2010, 2011, 2012, 2013, 2014, 2015, 2016],
-                "y": [10, 20, 15, 25, 22, 30, 28]
+                "x": list(map(int, list(max_signals.keys()))),
+                "y": list(max_signals.values())
                 }
             }
         ]
     }
 
-    result_dict["results"] = {"total_citizen_count": count}
+    result_dict["results"] = {
+        "total_citizen_count": count,
+        "signals_per_month": result["signals_per_month"],
+        "signals_per_citizen": result["signals_per_citizen"]
+        }
     
     return json.dumps(result_dict, indent=2)
 
@@ -141,7 +95,19 @@ def RPC_count_citizens(data):
     info("In the requested method")
     info(f"the dataset contains {len(data.index)} rows")
     info(f"count: {data['person_id'].nunique()}")
+    counts = np.unique(data.groupby("person_id").size(), return_counts=True)
+    data["debt_date"] = pd.to_datetime(data["debt_date"])
+    data["debt_date_string"] = data["debt_date"].dt.strftime("%Y-%m")
+    signals_month = data.groupby("debt_date").size()
     result_dict = {
-        "citizen_count": data['person_id'].nunique()
+        "citizen_count": data['person_id'].nunique(),
+        "signals_per_citizen": {
+            "signal_count": counts[0].tolist(),
+            "signal_sum": counts[1].tolist()
+        },
+        "signals_per_month" : {
+            "month": list(signals_month.index),
+            "sum": list(signals_month)
+        }
     }
     return result_dict
