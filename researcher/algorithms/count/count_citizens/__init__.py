@@ -49,7 +49,7 @@ def count_citizens(client, data):
         month_id = result["signals_per_month"]["month"]
         month_sum = result["signals_per_month"]["sum"]
         for i in list(range(0,len(signal_count))):
-            i_str = month_id[i].strftime("%Y-$m")
+            i_str = month_id[i].strftime("%Y-%m")
             
             if i_str in month_sum_signals:
                 month_sum_signals[i_str] = month_sum_signals[i_str] + month_sum[i]
