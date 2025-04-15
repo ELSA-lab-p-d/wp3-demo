@@ -1,0 +1,11 @@
+services:
+  ide:
+    build:
+      context: ide
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - PASSWORD=12345
+    volumes:
+      - ./:/home/coder/workspace
