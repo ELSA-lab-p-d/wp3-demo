@@ -44,4 +44,4 @@ docker run --rm -d \
     -p 80:80 \
     -e "SERVER_URL=http://localhost:5000" \
     -e "API_PATH=/api" \
-    harbor2.vantage6.ai/infrastructure/ui:3.7.1
+    ghcr.io/maastrichtu-biss/vantage6-ui:merged-dashboard
