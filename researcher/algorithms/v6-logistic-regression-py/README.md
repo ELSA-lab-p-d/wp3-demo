@@ -1,4 +1,4 @@
-# Federated Logistic Regression (ELSA Task 3.3)
+# Federated Logistic Regression (ELSA WP3 Task 3.3)
 
 This repository contains a federated logistic regression implementation built on the vantage6 framework, together with a Jupyter Notebook that demonstrates how early-warning (vroegsignalering) analyses can be performed across multiple data environments without sharing or centralising raw individual-level data.
 
