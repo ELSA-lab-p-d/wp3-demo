@@ -4,3 +4,5 @@ inforing.yaml
 .python-version
 *checkpoints/
 /researcher
+researcher/algorithms/.DS_Store
+researcher/algorithms/.DS_Store
