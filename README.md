@@ -1,29 +1,27 @@
-# ELSA Lab WP3a demo
+# Federated Logistic Regression (ELSA Task 3.3)
 
-In this demo, we provide an overview of using Privacy-enhancing technologies (PET) to analyze current and future data sharing solutions to address poverty and debt.
+This repository contains a federated logistic regression implementation using the **vantage6** framework, together with a Jupyter Notebook that demonstrates how early-warning analyses can be performed without sharing raw data.
 
-Specifically, this demo provides an infrastructure and example for analysis where the researcher is unable to access the data however is able to request to execute an analysis and receive the analysis results.
+The current version works **entirely with synthetic data** and is intended for experimentation and demonstration purposes.
 
-License: see [LICENSE](./LICENSE)
+---
 
-## Prerequisites
+## Requirements
 
-The following prerequisites are needed to execute this code:
+To run the code in this repository you need:
 
-- Docker Engine (Linux), Docker for Windows or Docker for macOS installed and operational
-- Python version 3.7 or higher (including pip)
-- 
+- Python 3.9 or higher
+- vantage6 (client and algorithm tools)
+- Jupyter Notebook
 
-## How to interpret this repository?
+All required Python packages are listed in `requirements.txt`.
 
-This repository contains an example how PET can be used, specifically using the [Vantage6](https://vantage6.ai) infrastructure. This repository contains code to setup one central server, one node, and one algorithm for testing purposes.
+---
 
-### Infrastructure
-The folder [infrastructure](./infrastructure) contains information to setup the infrastructure. More information about the infrastructure can be found in this folder.
-The scripts [setup.sh](./setup.sh) and [shutdown.sh](shutdown.sh) can be used to setup and shutdown the infrastructure.
+## Installation
 
-### Analysis
+1. Create and activate a virtual environment (recommended):
 
-A sample analysis is available in the [researcher](researcher/) folder. This contains an algorithm to count the number of citizens over multiple sources. The code for this federated analysis is available in [researcher/algorithms/count](researcher/algorithms/count) and the execution code is available in [researcher/execution/count.ipynb](researcher/execution/count.ipynb).
-
-Please mind this is a fictive example and is intended to show how the infrastructure works.
+```bash
+python -m venv .LR
+source .LR/bin/activate
