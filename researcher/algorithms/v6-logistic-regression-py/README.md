@@ -5,6 +5,7 @@ This repository contains a federated logistic regression implementation built on
 The notebook illustrates how statistical models can be estimated jointly using distributed data from different parties, while preserving data separation and governance constraints.
 
 The current version works entirely with synthetic data and is intended for experimentation, validation of the federated workflow, and demonstration of analytical feasibility.
+
 ---
 
 ## Requirements
